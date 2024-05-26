@@ -2,7 +2,8 @@ import socket
 from flet import *
 import os
 from strings import *
-from view import *
+from text_view import *
+from image2txt_view import *
 
 
 def main(page: Page):
@@ -35,8 +36,13 @@ def main(page: Page):
         page.views.clear()
         
         if page.route == '/text_prompt':
-            auth = Text_prompt(page)
-            page.views.append(auth)
+            text_prom = Text_prompt(page)
+            page.views.append(text_prom)
+            
+        if page.route == '/image2txt':
+            image_prom = Image_prompt(page)
+            page.views.append(image_prom)
+        
                         
         page.update()
 

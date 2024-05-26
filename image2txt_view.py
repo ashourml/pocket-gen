@@ -3,9 +3,9 @@ from strings import *
 from llm_logic import LLM_model
 import ollama
 import clipboard
-class Text_prompt(View):
+class Image_prompt(View):
     def __init__(self , page: Page):
-        super().__init__(route= '/text_prompt')
+        super().__init__(route= '/image2txt')
         
         
         self.background_color = background_color
@@ -50,6 +50,22 @@ class Text_prompt(View):
             content=self.user_input
         )
         
+        self.user_image = Text(
+            value= 'Your image path will appear here ...' ,
+            color= colors.WHITE,
+            width= 550 ,
+            height=20,
+            bgcolor=colors.BLACK12,
+            
+        )
+        self.user_image_field = Container(
+            padding=padding.only(left=10),
+            border_radius=20,
+            width=600,
+            height=60,
+            content=self.user_image
+        )
+
         self.drag_bar = WindowDragArea(
             content=Container(
                 height=40,
@@ -91,8 +107,9 @@ class Text_prompt(View):
         )
 
         self.prompt_generated = Text(
-                value= 'Prompt >>>',
-                selectable= True,    
+                value= 'prompt will appear here ...',
+                selectable= True,
+                opacity= 0.3
             )
         
         self.copy_icon = IconButton(
@@ -170,6 +187,7 @@ class Text_prompt(View):
             content=Column(
                 controls=[
                     self.drag_bar,
+                    self.user_image_field,
                     self.user_details_field,
                     self.generate_bt,
                     self.prompt_container, 
