@@ -30,6 +30,7 @@ def main(page: Page):
     }
     page.theme = Theme(font_family='sf')
 
+    
 
     
     def router(route) -> None:
@@ -40,7 +41,7 @@ def main(page: Page):
             page.views.append(text_prom)
             
         if page.route == '/image2txt':
-            image_prom = Image_prompt(page)
+            image_prom = Image_prompt(page )
             page.views.append(image_prom)
         
                         
@@ -48,7 +49,7 @@ def main(page: Page):
 
                 
     page.on_route_change = router
-    page.go('/text_prompt')
+    page.go('/image2txt')
     page.update()
 
 

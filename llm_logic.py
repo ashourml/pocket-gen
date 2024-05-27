@@ -1,7 +1,5 @@
 import ollama
-
-
-
+from io import BytesIO
 from flet import *
 
 
@@ -11,12 +9,9 @@ class LLM_model():
         
         
         self.model = 'prompt:latest'
-        # self.system_msg = 'you are expert in generating ai prompt to make perfect output based on user input description and replay with just 1 prompt '
-        # self.template = """Design a modern living room with a cityscape view: Create a luxurious living room that seamlessly blends into 
-        # the urban landscape outside. Use large windows to showcase the city skyline, and incorporate industrial metal
-        # accents such as exposed ductwork or metal beams to give the space an edgy feel. Add wood paneling on the walls to
-        # bring in a natural element, and use glass coffee tables to create a sleek, modern look """
+        self.llava_model = 'pocket_llava:latest'
         self.respo = ''
+
         
         
         
@@ -32,12 +27,36 @@ class LLM_model():
         )
         return self.respo
     
+    def Image_describe(self, image , prompt):
+        img_bytes =self.read_image(image)
+        
+        self.describe = ollama.generate(
+            model= self.llava_model,
+            prompt= f'with details in this photo give me stable diffusion prompt with this details : {prompt}',
+            stream=True,
+            images=[img_bytes],
+            
+            
+        ) 
+        return self.describe
     
-    
-    
+
+
+    def read_image(self, file_path):
+        with open(file_path, "rb") as file:
+            image_bytes = file.read()
+        return image_bytes
+
+
+
+
+
+
+
 # llm = LLM_model(ollama)
 # re = ""
-# respo = llm.generate('modern room with glass , wood , urban design')
+# respo = llm.Image_describe([imgb],'brown leather couch , blue light , 4k details ,realistic')
 
 # for i in respo:
+    
 #     print(re.join(i['response']) )

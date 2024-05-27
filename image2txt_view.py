@@ -4,10 +4,10 @@ from llm_logic import LLM_model
 import ollama
 import clipboard
 class Image_prompt(View):
-    def __init__(self , page: Page):
+    def __init__(self , page: Page ):
         super().__init__(route= '/image2txt')
         
-        
+        self.page = page
         self.background_color = background_color
         self.foreground_color = foreground_color 
         self.button_color = buttons_color
@@ -15,6 +15,14 @@ class Image_prompt(View):
         self.text_style_content = text_style_content
         self.shadow = shadow
         self.llm = LLM_model(ollama)
+        self.pick_files_dialog = FilePicker(on_result=self.pick_files_result)
+        self.page.overlay.append(
+            self.pick_files_dialog
+            
+        ) 
+        
+        
+        
         
         self.close_icon = IconButton(
             icon=icons.CLOSE_ROUNDED,
@@ -50,20 +58,22 @@ class Image_prompt(View):
             content=self.user_input
         )
         
-        self.user_image = Text(
-            value= 'Your image path will appear here ...' ,
-            color= colors.WHITE,
-            width= 550 ,
-            height=20,
-            bgcolor=colors.BLACK12,
-            
+        self.user_image_path = GestureDetector(
+            content=Text(
+                value= 'Your image path will appear here ...' ,
+                color= colors.WHITE,
+                width= 800 ,
+                height=20,
+                bgcolor=colors.BLACK12,
+            ),
+            on_tap=lambda x : self.pick_files_dialog.pick_files()
         )
         self.user_image_field = Container(
             padding=padding.only(left=10),
             border_radius=20,
-            width=600,
-            height=60,
-            content=self.user_image
+            width=400,
+            height=30,
+            content=self.user_image_path
         )
 
         self.drag_bar = WindowDragArea(
@@ -187,9 +197,16 @@ class Image_prompt(View):
             content=Column(
                 controls=[
                     self.drag_bar,
-                    self.user_image_field,
+                    Container(
+                        height=20),
                     self.user_details_field,
-                    self.generate_bt,
+                    Row(
+                        controls=[
+                            self.user_image_field,
+                            self.generate_bt
+                            ],
+                        alignment=MainAxisAlignment.CENTER
+                        ),
                     self.prompt_container, 
                     
                 ],
@@ -199,6 +216,7 @@ class Image_prompt(View):
             
             
         )
+        
         
         
         self.controls=[
@@ -227,13 +245,16 @@ class Image_prompt(View):
         )
         
         
+        
     def prompt_generate(self):
         
         prompt = self.user_input.value
         if prompt != '':
             self.prompt_generated.value = ''
             self.copy_icon.visible = True
-            prompt_respo = self.llm.generate(prompt=prompt)
+            prompt_respo = self.llm.Image_describe(
+                self.user_image_path.content.data,prompt=prompt)
+            
             data = ''
             for i in prompt_respo: 
                 data += i['response']
@@ -251,5 +272,17 @@ class Image_prompt(View):
         self.page.snack_bar.open = True
         self.page.update()
         
-
         
+
+    def pick_files_result(self ,e: FilePickerResultEvent):
+            
+            self.user_image_path.content.value = ''
+            self.user_image_path.content.data = r''
+            # print(e.files[0].path)
+            self.user_image_path.content.value = str(e.files[0].path) if e.files else 'cancelled'
+            # self.user_image_path.content.value = (
+            #     ", ".join(map(lambda f: f.name, e.files)) if e.files else "Cancelled!"
+            # )
+            self.user_image_path.content.data = self.user_image_path.content.value
+            self.user_image_path.content.update()
+            
