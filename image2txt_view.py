@@ -245,9 +245,17 @@ class Image_prompt(View):
         )
         
         
-        
+        self.progress_gen = ProgressRing(
+                    scale= 0.7,
+                    color= colors.GREEN_200,
+                    bgcolor= colors.TRANSPARENT,
+                    stroke_width= 5
+                )    
     def prompt_generate(self):
-        
+        self.pageview.content.controls[3].controls[-1]= self.progress_gen
+            
+        self.pageview.update()
+            
         prompt = self.user_input.value
         if prompt != '':
             self.prompt_generated.value = ''
@@ -263,6 +271,10 @@ class Image_prompt(View):
                 self.copy_icon.update()
                 self.prompt_generated.update()
             print(self.copy_icon.data)
+            self.pageview.content.controls[3].controls[-1]= self.generate_bt
+            
+            self.pageview.update()
+            
     def copy_prompt(self):
         try:
             clipboard.copy(self.copy_icon.data)
@@ -271,10 +283,12 @@ class Image_prompt(View):
         self.page.snack_bar = self.copied_prompt_snack_bar
         self.page.snack_bar.open = True
         self.page.update()
+    
         
         
 
     def pick_files_result(self ,e: FilePickerResultEvent):
+            
             
             self.user_image_path.content.value = ''
             self.user_image_path.content.data = r''

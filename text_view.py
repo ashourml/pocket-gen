@@ -186,9 +186,19 @@ class Text_prompt(View):
         )
         
         
+        self.progress_gen = ProgressRing(
+                    scale= 0.7,
+                    color= colors.GREEN_200,
+                    bgcolor= colors.TRANSPARENT,
+                    stroke_width= 5
+                )
+        
+        
         self.controls=[
             self.pageview
         ]
+        
+        
         
         self.copied_prompt_snack_bar = SnackBar(
             content=Row(
@@ -214,6 +224,11 @@ class Text_prompt(View):
         
     def prompt_generate(self):
         
+        self.pageview.content.controls[3]= self.progress_gen
+            
+        self.pageview.update()
+
+        
         prompt = self.user_input.value
         if prompt != '':
             self.prompt_generated.value = ''
@@ -227,6 +242,12 @@ class Text_prompt(View):
                 self.copy_icon.update()
                 self.prompt_generated.update()
             print(self.copy_icon.data)
+            self.pageview.content.controls[3]= self.generate_bt
+            
+            self.pageview.update()
+
+            
+            
     def copy_prompt(self):
         try:
             clipboard.copy(self.copy_icon.data)
