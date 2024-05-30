@@ -1,9 +1,19 @@
-import socket
+
+"""
+The main function sets up a graphical user interface for a "pocket prompt generator" application in
+Python using the Flet library for creating text and image prompts.
+
+:param page: The `page` parameter is an object that represents the current page being displayed in
+the application. It contains various properties and methods that allow you to customize the
+appearance and behavior of the page. In the provided code snippet, the `main` function is the entry
+point of the application and it takes a
+:type page: Page
+"""
 from flet import *
 import os
-from strings import *
-from text_view import *
-from image2txt_view import *
+from strings_.strings import *
+from views.text2text_view import *
+from views.image2txt_view import *
 
 
 def main(page: Page):

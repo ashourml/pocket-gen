@@ -1,8 +1,13 @@
+# The `Image_prompt` class is a Python class that represents a view for converting an image to text
+# prompt using a language model, with features such as user input fields, image selection, prompt
+# generation, and clipboard copying.
 from flet import *
-from strings import *
-from llm_logic import LLM_model
+from strings_.strings import *
+from Logic.llm_logic import LLM_model
 import ollama
 import clipboard
+
+
 class Image_prompt(View):
     def __init__(self , page: Page ):
         super().__init__(route= '/image2txt')
@@ -296,24 +301,6 @@ class Image_prompt(View):
         print('changed')
         self.page.go('/text_prompt')
         self.page.update()
-        # self.page.go('/text_prompt')
-        # self.page.update()
-        # if not self.mode_switch_bt.value:
-        #     self.page.views.append('/text_prompt')
-        #     self.mode_switch_bt.tooltip = 'Switch to Image2Prompt mode'
-        #     self.mode_switch_bt.label = 'Text2Prompt'
-        #     self.mode_switch_bt.update()
-        #     self.mode_switch_bt.value = True
-        #     self.mode_switch_bt.update()
-        #     self.page.update()
-        # if self.mode_switch_bt.value:
-        #     self.page.views.append('/image2txt')    
-        #     self.mode_switch_bt.tooltip = 'Switch to Text2Prompt mode'
-        #     self.mode_switch_bt.label = 'Image2Prompt'
-        #     self.mode_switch_bt.update()
-        #     self.mode_switch_bt.value = False
-        #     self.mode_switch_bt.update()
-        #     self.page.update()
         
     def prompt_generate(self):
         self.pageview.content.controls[3].controls[-1]= self.progress_gen
@@ -325,7 +312,7 @@ class Image_prompt(View):
             self.prompt_generated.value = ''
             self.copy_icon.visible = True
             prompt_respo = self.llm.Image_describe(
-                self.user_image_path.content.data,prompt=prompt)
+                self.user_image_path.content.data,prompt="with the details on this photo generate stable diffusion prompt for architecture render with this style : "+ prompt+" give me just prompt")
             
             data = ''
             for i in prompt_respo: 
@@ -356,11 +343,7 @@ class Image_prompt(View):
             
             self.user_image_path.content.value = ''
             self.user_image_path.content.data = r''
-            # print(e.files[0].path)
             self.user_image_path.content.value = str(e.files[0].path) if e.files else 'cancelled'
-            # self.user_image_path.content.value = (
-            #     ", ".join(map(lambda f: f.name, e.files)) if e.files else "Cancelled!"
-            # )
             self.user_image_path.content.data = self.user_image_path.content.value
             self.user_image_path.content.update()
             

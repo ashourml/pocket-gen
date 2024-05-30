@@ -1,6 +1,6 @@
 from flet import *
-from strings import *
-from llm_logic import LLM_model
+from strings_.strings import *
+from Logic.llm_logic import LLM_model
 import ollama
 import clipboard
 class Text_prompt(View):
