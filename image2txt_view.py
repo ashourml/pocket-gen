@@ -75,6 +75,38 @@ class Image_prompt(View):
             height=30,
             content=self.user_image_path
         )
+        
+        
+        self.image2prompt_bt = TextButton(
+            icon= icons.TEXT_FORMAT,
+            text= "Text to Text",
+            tooltip='Switch to Text to Text mode',
+            icon_color= colors.WHITE,
+            on_click= lambda x : self.Switch_view(),
+            style= ButtonStyle(
+                color= colors.WHITE
+            )
+            
+        )
+
+        
+        # self.mode_switch_bt = Switch(
+        #     label= 'Image2Prompt',
+        #     label_position= LabelPosition.LEFT,
+        #     active_color= colors.GREEN_200,
+        #     inactive_track_color= colors.WHITE,
+        #     scale= 0.7,
+        #     label_style= TextStyle(
+        #         size=17  
+        #     ),
+            
+        #     tooltip= 'Switch to Text2Prompt mode',
+        #     mouse_cursor= MouseCursor.CLICK,
+        #     on_change= lambda x: self.Switch_view(),
+            
+
+        # )
+
 
         self.drag_bar = WindowDragArea(
             content=Container(
@@ -105,8 +137,14 @@ class Image_prompt(View):
                         Row(
                             alignment=MainAxisAlignment.END,
                             controls=[
-                             self.close_icon
+                             self.image2prompt_bt ,
+                             VerticalDivider(
+                                 thickness=1
+                                 ),
+                             self.close_icon,
+                             
                             ],
+                            spacing= 0
 
                         )
                     ]
@@ -251,6 +289,32 @@ class Image_prompt(View):
                     bgcolor= colors.TRANSPARENT,
                     stroke_width= 5
                 )    
+        
+        
+        
+    def Switch_view(self):
+        print('changed')
+        self.page.go('/text_prompt')
+        self.page.update()
+        # self.page.go('/text_prompt')
+        # self.page.update()
+        # if not self.mode_switch_bt.value:
+        #     self.page.views.append('/text_prompt')
+        #     self.mode_switch_bt.tooltip = 'Switch to Image2Prompt mode'
+        #     self.mode_switch_bt.label = 'Text2Prompt'
+        #     self.mode_switch_bt.update()
+        #     self.mode_switch_bt.value = True
+        #     self.mode_switch_bt.update()
+        #     self.page.update()
+        # if self.mode_switch_bt.value:
+        #     self.page.views.append('/image2txt')    
+        #     self.mode_switch_bt.tooltip = 'Switch to Text2Prompt mode'
+        #     self.mode_switch_bt.label = 'Image2Prompt'
+        #     self.mode_switch_bt.update()
+        #     self.mode_switch_bt.value = False
+        #     self.mode_switch_bt.update()
+        #     self.page.update()
+        
     def prompt_generate(self):
         self.pageview.content.controls[3].controls[-1]= self.progress_gen
             

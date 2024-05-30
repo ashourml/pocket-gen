@@ -49,7 +49,7 @@ def main(page: Page):
 
                 
     page.on_route_change = router
-    page.go('/image2txt')
+    page.go('/text_prompt')
     page.update()
 
 
