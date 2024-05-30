@@ -77,6 +77,9 @@ After installing the dependencies and configuring the models, you can run the ap
 ```sh
 flet run
 ```
+## Screenshots
+![text to text](tutorial/1.jpg)
+![image to text](tutorial/2.jpg)
 
 ## Main Function
 
