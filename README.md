@@ -81,6 +81,12 @@ flet run
 ![text to text](tutorial/1.jpg)
 ![image to text](tutorial/2.jpg)
 
+## Examples ( pocket-gen & stable diffusion & controlnet) :
+![text to text](examples/1.jpg)
+![text to text](examples/2.jpg)
+![text to text](examples/3.jpg)
+![text to text](examples/4.jpg)
+
 ## Main Function
 
 The `main.py` script sets up a graphical user interface for the Pocket-Gen application using the Flet library. The main features include:
