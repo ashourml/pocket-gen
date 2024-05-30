@@ -1,5 +1,5 @@
 # Pocket-Gen
-![Profile Banner](https://drive.google.com/file/d/1OVvfkOvqAw8GIU1DP27uE-4ppJFA8OsE/view?usp=drive_link)
+![logo Banner](assets/logo.png)
 
 Pocket-Gen is a prompt generator application using Python, Flet library, and Ollama LLM. This tool helps users generate and manage prompts efficiently.
 
