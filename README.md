@@ -3,7 +3,7 @@
 Pocket-Gen is a prompt generator application using Python, Flet library, and Ollama LLM. This tool helps users generate and manage prompts efficiently.
 
 ## Project Structure
-
+```sh
 pocket-gen/
 ├── init.py
 ├── assets/
@@ -28,7 +28,7 @@ pocket-gen/
 └── views/
 ├── image2txt_view.py
 └── text2text_view.py
-
+```
 
 ## Prerequisites
 
@@ -75,37 +75,48 @@ After installing the dependencies and configuring the models, you can run the ap
 
 ```sh
 flet run
+```
 
-Main Function
-The main.py script sets up a graphical user interface for the Pocket-Gen application using the Flet library. The main features include:
+## Main Function
 
-Window Settings: Custom window settings such as size, padding, and always-on-top.
-Routing: Handles routing between different views (/text_prompt and /image2txt).
-Custom Fonts: Uses custom fonts located in the assets/fonts directory.
-Views: Loads views from the views directory.
-Directory Breakdown
-assets/: Contains font files and icons used in the application.
-Logic/: Contains the core logic for the LLM operations.
-Model_Create/: Contains scripts for creating models.
-strings_/: Contains string management scripts.
-views/: Contains the view components for different parts of the application.
-Configuration
-Ensure that all dependencies are installed as per the requirements.txt file. Additionally, make sure that Ollama, Llava, and Llama2 LLM models are installed and configured properly.
+The `main.py` script sets up a graphical user interface for the Pocket-Gen application using the Flet library. The main features include:
 
-Contributing
+- **Window Settings**: Custom window settings such as size, padding, and always-on-top.
+- **Routing**: Handles routing between different views (`/text_prompt` and `/image2txt`).
+- **Custom Fonts**: Uses custom fonts located in the `assets/fonts` directory.
+- **Views**: Loads views from the `views` directory.
+
+## Directory Breakdown
+
+- **assets/**: Contains font files and icons used in the application.
+- **Logic/**: Contains the core logic for the LLM operations.
+- **Model_Create/**: Contains scripts for creating models.
+- **strings_/**: Contains string management scripts.
+- **views/**: Contains the view components for different parts of the application.
+
+## Configuration
+
+Ensure that all dependencies are installed as per the `requirements.txt` file. Additionally, make sure that Ollama, Llava, and Llama2 LLM models are installed and configured properly.
+
+## Contributing
+
 If you would like to contribute to this project, please follow these steps:
 
-Fork the repository.
-Create a new branch (git checkout -b feature-foo).
-Commit your changes (git commit -am 'Add feature foo').
-Push to the branch (git push origin feature-foo).
-Create a new Pull Request.
-License
-This project is licensed under the MIT License. See the LICENSE file for more details.
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-foo`).
+3. Commit your changes (`git commit -am 'Add feature foo'`).
+4. Push to the branch (`git push origin feature-foo`).
+5. Create a new Pull Request.
 
-Contact
-If you have any questions or feedback, feel free to contact me at your-email@example.com.
+## License
 
-Acknowledgements
-Thanks to the contributors of the Flet library and Ollama LLM.
-Icons and fonts from [source names].
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
+## Contact
+
+If you have any questions or feedback, feel free to contact me at [Ashour@Ashour.live](mailto:Ashour@ashour.live).
+
+## Acknowledgements
+
+- Thanks to the contributors of the Flet library and Ollama LLM.
+
